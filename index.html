@@ -1,0 +1,505 @@
+<title>MoRaj Ledger — accounting that works with the internet switched off</title>
+
+<style>
+  /* ── Tokens ──────────────────────────────────────────────────────────────
+     A ledger palette. The ground is paper-white with real ruled lines rather
+     than a cream wash; the accent is a deep ledger-ink green. Neutrals carry a
+     slight green bias so they sit with the accent instead of fighting it. */
+  :root {
+    --ink:        #14201d;
+    --ink-2:      #40514c;
+    --ink-3:      #6f807a;
+    --paper:      #ffffff;
+    --paper-2:    #f4f6f4;
+    --rule:       #dfe4e0;
+    --rule-2:     #c6cec9;
+    --accent:     #0e5a49;
+    --accent-2:   #0a4437;
+    --accent-soft:#e7f0ec;
+    --ochre:      #8a5f14;
+    --ochre-soft: #f6efe0;
+
+    --measure: 68ch;
+    --gap: clamp(1rem, 2.5vw, 1.75rem);
+    --section-y: clamp(3.5rem, 8vw, 6.5rem);
+
+    --serif: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+    --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #e8eeea; --ink-2: #a9b7b1; --ink-3: #7c8a84;
+      --paper: #0e1614; --paper-2: #141f1c;
+      --rule: #26332e; --rule-2: #35443e;
+      --accent: #5fbea4; --accent-2: #86d3bd; --accent-soft: #162a24;
+      --ochre: #d7a95c; --ochre-soft: #2a2013;
+    }
+  }
+  :root[data-theme='dark'] {
+    --ink: #e8eeea; --ink-2: #a9b7b1; --ink-3: #7c8a84;
+    --paper: #0e1614; --paper-2: #141f1c;
+    --rule: #26332e; --rule-2: #35443e;
+    --accent: #5fbea4; --accent-2: #86d3bd; --accent-soft: #162a24;
+    --ochre: #d7a95c; --ochre-soft: #2a2013;
+  }
+  :root[data-theme='light'] {
+    --ink: #14201d; --ink-2: #40514c; --ink-3: #6f807a;
+    --paper: #ffffff; --paper-2: #f4f6f4;
+    --rule: #dfe4e0; --rule-2: #c6cec9;
+    --accent: #0e5a49; --accent-2: #0a4437; --accent-soft: #e7f0ec;
+    --ochre: #8a5f14; --ochre-soft: #f6efe0;
+  }
+
+  .page { background: var(--paper); color: var(--ink); font-family: var(--sans);
+          line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .page *, .page *::before, .page *::after { box-sizing: border-box; }
+  .wrap { width: min(100% - 2.5rem, 74rem); margin-inline: auto; }
+
+  /* The ledger rule: a hairline that runs down the left of every section,
+     with the section label sitting on it like a column heading. */
+  .sec { padding-block: var(--section-y); border-top: 1px solid var(--rule); }
+  .sec:first-of-type { border-top: 0; }
+  .sec-head { display: grid; grid-template-columns: minmax(0, 12rem) minmax(0, 1fr);
+              gap: var(--gap); align-items: start; margin-bottom: 2.5rem; }
+  .sec-label { font-family: var(--mono); font-size: .72rem; letter-spacing: .14em;
+               text-transform: uppercase; color: var(--ink-3); padding-top: .55rem;
+               border-top: 2px solid var(--accent); }
+  .sec-head h2 { margin: 0; font-family: var(--serif); font-weight: 600;
+                 font-size: clamp(1.6rem, 3.4vw, 2.4rem); line-height: 1.15;
+                 letter-spacing: -.015em; text-wrap: balance; }
+  .sec-head p { margin: .75rem 0 0; color: var(--ink-2); max-width: var(--measure); }
+  @media (max-width: 46rem) { .sec-head { grid-template-columns: 1fr; } }
+
+  /* ── Hero ─────────────────────────────────────────────────────────────── */
+  .hero { padding-block: clamp(3rem, 9vw, 6rem) var(--section-y); }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+               gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+  @media (max-width: 60rem) { .hero-grid { grid-template-columns: 1fr; } }
+  .brand { display: flex; align-items: baseline; gap: .6rem; margin-bottom: 2rem; }
+  .brand-mark { font-family: var(--serif); font-size: 1.35rem; font-weight: 700; letter-spacing: -.02em; }
+  .brand-mark span { color: var(--accent); }
+  .brand-sub { font-family: var(--mono); font-size: .7rem; letter-spacing: .12em;
+               text-transform: uppercase; color: var(--ink-3); }
+  .hero h1 { margin: 0; font-family: var(--serif); font-weight: 600;
+             font-size: clamp(2.1rem, 5.4vw, 3.6rem); line-height: 1.08;
+             letter-spacing: -.025em; text-wrap: balance; }
+  .hero .lede { margin: 1.25rem 0 0; font-size: clamp(1.02rem, 1.6vw, 1.18rem);
+                color: var(--ink-2); max-width: 46ch; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; align-items: center; }
+  .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .8rem 1.4rem;
+         border-radius: 3px; font-weight: 600; font-size: .95rem; text-decoration: none;
+         border: 1px solid transparent; transition: background .15s ease, border-color .15s ease; }
+  .btn-primary { background: var(--accent); color: var(--paper); }
+  .btn-primary:hover { background: var(--accent-2); }
+  :root[data-theme='dark'] .btn-primary,
+  .btn-primary { color: #fff; }
+  @media (prefers-color-scheme: dark) { .btn-primary { color: #08130f; } }
+  :root[data-theme='dark'] .btn-primary { color: #08130f; }
+  :root[data-theme='light'] .btn-primary { color: #fff; }
+  .btn-quiet { border-color: var(--rule-2); color: var(--ink); }
+  .btn-quiet:hover { border-color: var(--ink-3); }
+  .cta-note { font-size: .85rem; color: var(--ink-3); }
+  .page a:focus-visible, .page button:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  /* The voucher: the most characteristic object in this product's world —
+     two columns that must foot to the same figure, or it will not post. */
+  .voucher { border: 1px solid var(--rule-2); background: var(--paper);
+             box-shadow: 0 1px 0 var(--rule), 0 18px 40px -28px rgba(0,0,0,.35); }
+  .voucher-top { display: flex; justify-content: space-between; align-items: baseline;
+                 gap: 1rem; padding: .9rem 1.1rem; border-bottom: 1px solid var(--rule); }
+  .voucher-code { font-family: var(--mono); font-size: .82rem; color: var(--ink); }
+  .voucher-tag { font-family: var(--mono); font-size: .66rem; letter-spacing: .1em;
+                 text-transform: uppercase; color: var(--accent);
+                 background: var(--accent-soft); padding: .2rem .5rem; border-radius: 2px; }
+  .vtable { width: 100%; border-collapse: collapse; font-size: .87rem; }
+  .vtable th { text-align: left; font-family: var(--mono); font-weight: 500; font-size: .68rem;
+               letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3);
+               padding: .6rem 1.1rem; border-bottom: 1px solid var(--rule); }
+  .vtable td { padding: .55rem 1.1rem; border-bottom: 1px solid var(--rule); color: var(--ink-2); }
+  .vtable tr:nth-child(even) td { background: var(--paper-2); }
+  .num { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums;
+         color: var(--ink); white-space: nowrap; }
+  .vtable tfoot td { border-bottom: 0; border-top: 2px solid var(--rule-2);
+                     font-weight: 700; color: var(--ink); background: transparent; }
+  .voucher-foot { padding: .7rem 1.1rem; font-size: .78rem; color: var(--ink-3);
+                  border-top: 1px solid var(--rule); display: flex; gap: .45rem; align-items: center; }
+  .tick { color: var(--accent); font-weight: 700; }
+
+  /* ── Promises ─────────────────────────────────────────────────────────── */
+  .promises { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 0;
+              border: 1px solid var(--rule); }
+  .promise { padding: 1.6rem 1.5rem; border-right: 1px solid var(--rule); }
+  .promise:last-child { border-right: 0; }
+  @media (max-width: 52rem) {
+    .promise { border-right: 0; border-bottom: 1px solid var(--rule); }
+    .promise:last-child { border-bottom: 0; }
+  }
+  .promise h3 { margin: 0 0 .5rem; font-size: 1rem; font-weight: 650; letter-spacing: -.005em; }
+  .promise p { margin: 0; font-size: .92rem; color: var(--ink-2); }
+
+  /* ── Ruled feature lists ──────────────────────────────────────────────── */
+  .ruled { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+  .ruled li { display: grid; grid-template-columns: minmax(0, 12rem) minmax(0, 1fr);
+              gap: var(--gap); padding: 1.05rem 0; border-bottom: 1px solid var(--rule); }
+  .ruled dt, .ruled .k { font-weight: 650; font-size: .95rem; }
+  .ruled .v { color: var(--ink-2); font-size: .93rem; }
+  /* Small print that has to be read, not hidden: the trial is handed over by a
+     person, and saying why up front is better than a surprise at first launch. */
+  .fine { margin: 1.1rem 0 0; font-size: .85rem; color: var(--ink-3);
+          max-width: var(--measure); }
+  @media (max-width: 46rem) { .ruled li { grid-template-columns: 1fr; gap: .3rem; } }
+
+  /* ── Phases table ─────────────────────────────────────────────────────── */
+  .scroller { overflow-x: auto; border: 1px solid var(--rule); }
+  .phases { width: 100%; border-collapse: collapse; font-size: .92rem; min-width: 44rem; }
+  .phases th { text-align: left; font-family: var(--mono); font-weight: 500; font-size: .68rem;
+               letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3);
+               padding: .85rem 1.1rem; border-bottom: 1px solid var(--rule-2); white-space: nowrap; }
+  .phases td { padding: 1rem 1.1rem; border-bottom: 1px solid var(--rule); vertical-align: top; color: var(--ink-2); }
+  .phases tr:last-child td { border-bottom: 0; }
+  .phases .code { font-family: var(--mono); font-size: .78rem; color: var(--accent); white-space: nowrap; }
+  .phases .name { color: var(--ink); font-weight: 650; white-space: nowrap; }
+  .phases .base { display: inline-block; margin-left: .45rem; font-family: var(--mono);
+                  font-size: .6rem; letter-spacing: .08em; text-transform: uppercase;
+                  color: var(--ochre); background: var(--ochre-soft); padding: .15rem .4rem; border-radius: 2px; }
+
+  /* ── Trial callout ────────────────────────────────────────────────────── */
+  .callout { border: 1px solid var(--rule-2); border-left: 3px solid var(--accent);
+             background: var(--paper-2); padding: 1.5rem 1.6rem; }
+  .callout h3 { margin: 0 0 .6rem; font-size: 1.05rem; }
+  .callout p { margin: 0 0 .6rem; color: var(--ink-2); max-width: var(--measure); }
+  .callout p:last-child { margin-bottom: 0; }
+
+  .foot { border-top: 1px solid var(--rule); padding-block: 2.5rem 3.5rem;
+          font-size: .85rem; color: var(--ink-3); display: flex; flex-wrap: wrap;
+          gap: 1rem; justify-content: space-between; }
+
+  @media (prefers-reduced-motion: reduce) { .page * { transition: none !important; } }
+</style>
+
+<div class="page">
+  <div class="wrap">
+
+    <!-- ── Hero ───────────────────────────────────────────────────────── -->
+    <header class="hero">
+      <div class="brand">
+        <!-- The PRODUCT is MoRaj Ledger. "Finance Suite" is the repository and build name —
+             engineering vocabulary, barred from customer-facing copy by docs/BRAND.md. It was
+             sitting on the wordmark, which is the most-read three words on the site. -->
+        <span class="brand-mark">MoRaj <span>Ledger</span></span>
+        <span class="brand-sub">by MoRaj Systems &amp; Supplies</span>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <h1>Accounting that works with the internet switched off.</h1>
+          <p class="lede">
+            A complete double-entry book of account for Ghanaian businesses, schools and
+            NGOs. It runs entirely on your own computer — no monthly hosting, no cloud
+            account, and nothing to log in to.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#trial">Try it free for 30 days</a>
+            <a class="btn btn-quiet" href="#phases">See what's included</a>
+          </div>
+          <p class="cta-note">Windows and macOS · every feature unlocked during the trial</p>
+        </div>
+
+        <!-- The thesis, shown rather than claimed: a voucher that balances. -->
+        <figure class="voucher" style="margin:0">
+          <div class="voucher-top">
+            <span class="voucher-code">PV-2026-000214</span>
+            <span class="voucher-tag">Posted</span>
+          </div>
+          <table class="vtable">
+            <caption class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">
+              An example payment voucher whose debits equal its credits
+            </caption>
+            <thead>
+              <tr><th scope="col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Freight &amp; handling charges</td><td class="num">7,560.00</td><td class="num">—</td></tr>
+              <tr><td>Withholding tax payable — GRA</td><td class="num">—</td><td class="num">1,512.00</td></tr>
+              <!-- A neutral label. This read "UCC common fund", which names a real client's
+                   institution on a public page — the community fund is a renameable setting,
+                   so the demo should show the setting, not somebody's books. -->
+              <tr><td>Community fund levy</td><td class="num">—</td><td class="num">302.40</td></tr>
+              <tr><td>Bank — cheque 969864</td><td class="num">—</td><td class="num">5,745.60</td></tr>
+            </tbody>
+            <tfoot>
+              <tr><td>Total</td><td class="num">7,560.00</td><td class="num">7,560.00</td></tr>
+            </tfoot>
+          </table>
+          <figcaption class="voucher-foot">
+            <span class="tick">✓</span> Balanced to the pesewa — the ledger refuses anything that is not.
+          </figcaption>
+        </figure>
+      </div>
+    </header>
+
+    <!-- ── Structural promises ────────────────────────────────────────── -->
+    <section class="sec">
+      <div class="sec-head">
+        <div class="sec-label">Why it is built this way</div>
+        <div>
+          <h2>Your books are files on your machine.</h2>
+          <p>
+            Most accounting software rents you access to your own accounts. This does the
+            opposite, on purpose — and that single decision is what makes the rest of it
+            possible.
+          </p>
+        </div>
+      </div>
+
+      <div class="promises">
+        <div class="promise">
+          <h3>It works offline</h3>
+          <p>
+            Power cut, no data, network down — it does not matter. Everything runs locally,
+            so the day the internet is out is a normal working day.
+          </p>
+        </div>
+        <div class="promise">
+          <h3>No subscription hostage</h3>
+          <p>
+            You buy a licence once and own it. If you ever stop paying for updates, the
+            software keeps working exactly as it is. Your ledger is never held to ransom.
+          </p>
+        </div>
+        <div class="promise">
+          <h3>You can always leave</h3>
+          <p>
+            Every statement exports to Excel, every document to PDF, and the ledger itself is
+            a standard PostgreSQL database in your own folder. There is no lock-in to escape.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Ghana ──────────────────────────────────────────────────────── -->
+    <section class="sec">
+      <div class="sec-head">
+        <div class="sec-label">Built for Ghana</div>
+        <div>
+          <h2>The statutory work is already in it.</h2>
+          <p>
+            Not a generic ledger with Ghana bolted on — the returns, certificates and
+            schedules are first-class parts of the software.
+          </p>
+        </div>
+      </div>
+
+      <ul class="ruled">
+        <li><span class="k">Withholding tax</span><span class="v">WHT on goods, services, works, sitting allowances and non-resident payments, with per-line rates on a split payment, GRA withholding certificates and monthly return schedules.</span></li>
+        <li><span class="k">WHVAT &amp; levies</span><span class="v">Withholding-VAT agent handling with credit certificates, and a community fund levy you name yourself — it is a setting, not a hard-coded institution.</span></li>
+        <li><span class="k">Tourism levy</span><span class="v">The 1% levy on invoices and cash receipts, with its own return for the GTA — for hotels, restaurants and tourism enterprises.</span></li>
+        <li><span class="k">VAT</span><span class="v">Output and input VAT with a GL-true VAT return, credit carried forward, and a net remittance posted against a cheque.</span></li>
+        <li><span class="k">Payroll</span><span class="v">PAYE on the current Act 896 bands, SSNIT tier 1, tier 2 and tier 3, bonus and overtime at their concessionary rates, payslips and a bank salary advice.</span></li>
+        <li><span class="k">Bank of Ghana rates</span><span class="v">Fetch the daily interbank rate, or paste a year of them at once — every foreign-currency transaction valued at the rate for its own date.</span></li>
+      </ul>
+    </section>
+
+    <!-- ── Phases ─────────────────────────────────────────────────────── -->
+    <section class="sec" id="phases">
+      <div class="sec-head">
+        <div class="sec-label">What you buy</div>
+        <div>
+          <h2>Buy the phases you need. Own them for ever.</h2>
+          <p>
+            Phase&nbsp;1 is a complete accounting system on its own — we do not sell a base
+            that cannot close a month. Add a phase later and it is simply a new licence key:
+            nothing is reinstalled and no data moves.
+          </p>
+        </div>
+      </div>
+
+      <div class="scroller">
+        <table class="phases">
+          <thead>
+            <tr>
+              <th scope="col">Phase</th>
+              <th scope="col">What it adds</th>
+              <th scope="col">Typically needed by</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="code">P1</span><br><span class="name">Core Books</span><span class="base">Required</span></td>
+              <td>Chart of accounts, journals, payments and receipts, bank accounts and transfers, reconciliation, cheque register, petty cash, month-end and year-end close, opening balances, users and roles, audit log, backup and restore — with the Trial Balance, Income &amp; Expenditure and Statement of Financial Position.</td>
+              <td>Everyone.</td>
+            </tr>
+            <tr>
+              <td><span class="code">P2</span><br><span class="name">Sales, Purchases &amp; Tax</span></td>
+              <td>Customer invoices and vendor bills with ageing, plus withholding tax, WHVAT, VAT, the community fund levy and the 1% tourism levy — returns, schedules and certificates.</td>
+              <td>Anyone who invoices, buys on credit, or is VAT/WHT registered.</td>
+            </tr>
+            <tr>
+              <td><span class="code">P3</span><br><span class="name">Payroll &amp; People</span></td>
+              <td>Payroll with PAYE, SSNIT and tier schedules, payslips, bank salary advice, staff loans and staff advances.</td>
+              <td>Employers running their own payroll.</td>
+            </tr>
+            <tr>
+              <td><span class="code">P4</span><br><span class="name">Assets &amp; Stores</span></td>
+              <td>Fixed-asset register with depreciation, revaluation, disposal and physical verification; inventory and stores; fuel coupons and vehicle custody.</td>
+              <td>Organisations holding equipment, stock or vehicles.</td>
+            </tr>
+            <tr>
+              <td><span class="code">P5</span><br><span class="name">Grants, Budgets &amp; Advanced Reporting</span></td>
+              <td>Donor projects and restricted funds, budgets with quarterly phasing and commitments, procurement, foreign currency and revaluation, and the full statement set — Cash Flow, Changes in Funds, Notes, Donor statements and Fund Balances.</td>
+              <td>Donor-funded bodies, schools and NGOs.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Per-phase prices stay in the PDF one-pager (docs/PRICING.md), where they are dated
+           and can be quoted against a real requirement. The page states the honest range and
+           the founding price, so nobody has to ask what it costs before they will talk. -->
+      <p class="fine">
+        <strong>Core Books is GH₵3,000, once.</strong> Add phases as you need them — a full
+        five-phase licence is GH₵8,500, or <a href="#founding" style="color:var(--accent)">GH₵5,525
+        as a founding customer</a>. Every price is a one-off: you own what you buy, on one
+        computer, for ever. Updates are an optional 20% a year, and letting them lapse never
+        stops the software or closes your books.
+      </p>
+    </section>
+
+    <!-- ── Protection ─────────────────────────────────────────────────── -->
+    <section class="sec">
+      <div class="sec-head">
+        <div class="sec-label">What protects the books</div>
+        <div>
+          <h2>Designed for the day something goes wrong.</h2>
+          <p>
+            An accounting system earns its keep in the bad week, not the good one. These are
+            the parts nobody asks about until they need them.
+          </p>
+        </div>
+      </div>
+
+      <ul class="ruled">
+        <li><span class="k">Nothing is edited away</span><span class="v">A posted entry is immutable. Corrections are reversals that leave both the original and the reversal on the record — exactly what an auditor expects to see.</span></li>
+        <li><span class="k">Dual control</span><span class="v">Large payments and hand-keyed journals require a second approver, at thresholds you set.</span></li>
+        <li><span class="k">Continuous self-checking</span><span class="v">After every posting the software re-proves that each sub-ledger still agrees with its control account, and says so loudly the moment it does not.</span></li>
+        <li><span class="k">Backups that are proven</span><span class="v">Scheduled local backups, encrypted off-site copies safe to keep in a cloud folder, and a one-click drill that restores a backup in a scratch copy to prove it works — without touching your live books.</span></li>
+        <li><span class="k">It notices a moved ledger</span><span class="v">Open your books on a second computer and it tells you, before two copies quietly drift apart.</span></li>
+      </ul>
+    </section>
+
+    <!-- ── Trial ──────────────────────────────────────────────────────── -->
+    <section class="sec" id="trial">
+      <div class="sec-head">
+        <div class="sec-label">Try it</div>
+        <div>
+          <h2>Thirty days, everything unlocked.</h2>
+          <p>
+            Not a crippled demo — the whole product, every phase, on your real figures. It
+            installs alongside anything else you have and keeps its own data.
+          </p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <h3>What happens when the trial ends</h3>
+        <p>
+          <strong>Your books stay open.</strong> You can still view them, print them, export
+          every statement to Excel and take a backup. Only the recording of new entries stops.
+        </p>
+        <p>
+          Enter a licence key and you carry straight on — everything you entered during the
+          evaluation is still there. We will never trap your accounting data behind a payment.
+        </p>
+      </div>
+
+      <div class="cta-row" style="margin-top:2rem">
+        <a class="btn btn-primary" href="mailto:ebo4udat@gmail.com?subject=MoRaj%20Ledger%20—%2030-day%20trial&amp;body=Hello%2C%0A%0AI%20would%20like%20to%20try%20MoRaj%20Ledger.%0A%0AOrganisation%3A%20%0AWhat%20we%20do%3A%20%0AWindows%20or%20Mac%3A%20%0AHow%20many%20people%20will%20use%20it%3A%20%0A%0AThank%20you.">Ask for the trial</a>
+        <span class="cta-note">
+          We send you the build for your machine and help you get it set up. One reply, usually the same working day.
+        </span>
+      </div>
+      <p class="fine">
+        We hand the trial over personally rather than putting it behind a download button. It takes us a
+        message and it means the first ten minutes go right — the installer is signed for evaluation, not
+        through the app stores, so a machine that has never seen it will ask before it runs.
+      </p>
+    </section>
+
+    <!-- ── Founding customers ─────────────────────────────────────────── -->
+    <section class="sec" id="founding">
+      <div class="sec-head">
+        <div class="sec-label">Founding customers</div>
+        <div>
+          <h2>The first ten pay less, because they are buying first.</h2>
+          <p>
+            There is no customer list yet. You would be taking a chance on us, and that is worth
+            something — so we have priced it, said so plainly, and put an end date on it.
+          </p>
+        </div>
+      </div>
+
+      <ul class="ruled">
+        <li><span class="k">35% off any phase</span><span class="v">The full five-phase bundle comes to GH₵5,525 instead of GH₵8,500. Yours for ever, on one computer.</span></li>
+        <li><span class="k">First year of updates included</span><span class="v">New versions, and the changes that follow GRA and SSNIT budgets, for twelve months.</span></li>
+        <li><span class="k">We do the setup</span><span class="v">Chart of accounts, opening balances, your first reconciliation — with you, on your figures, not left as homework.</span></li>
+        <li><span class="k">Ninety days to change your mind</span><span class="v">Full refund, and we help you export everything out. We can promise that because the software already lets you leave: standard database, every statement to Excel and PDF.</span></li>
+        <li><span class="k">Your price is locked for a year</span><span class="v">Start with Core Books and add a phase in eight months at the same founding rate.</span></li>
+      </ul>
+
+      <div class="callout">
+        <h3>What we ask in return</h3>
+        <p>
+          If it works for you, tell somebody. A phone call with a prospect, or a few sentences we may
+          quote with your name on them. It is not a condition of the refund and it is never a condition
+          of support — but references are the one thing we cannot buy, and you would be giving us the
+          first.
+        </p>
+      </div>
+
+      <div class="cta-row" style="margin-top:2rem">
+        <a class="btn btn-primary" href="mailto:ebo4udat@gmail.com?subject=MoRaj%20Ledger%20—%20founding%20customer&amp;body=Hello%2C%0A%0AI%20am%20interested%20in%20the%20founding-customer%20offer.%0A%0AOrganisation%3A%20%0AWhat%20we%20do%3A%20%0AWhich%20phases%20we%20think%20we%20need%3A%20%0AWhat%20we%20use%20today%3A%20%0A%0AThank%20you.">Talk to us about it</a>
+        <span class="cta-note">Ten organisations, until 31 October 2026.</span>
+      </div>
+    </section>
+
+    <!-- ── For accountants ────────────────────────────────────────────── -->
+    <section class="sec" id="accountants">
+      <div class="sec-head">
+        <div class="sec-label">For accountants</div>
+        <div>
+          <h2>If you keep other people's books, this is built for you.</h2>
+          <p>
+            A free perpetual licence for your own practice, every phase, and a share of any licence a
+            client of yours takes. Your clients' ledgers stay on their own machines, and you get a
+            system you already know how to support.
+          </p>
+        </div>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:ebo4udat@gmail.com?subject=MoRaj%20Ledger%20—%20accounting%20practice&amp;body=Hello%2C%0A%0AI%20run%20an%20accounting%20practice%20and%20would%20like%20to%20hear%20about%20the%20partner%20arrangement.%0A%0APractice%3A%20%0ARoughly%20how%20many%20clients%3A%20%0A%0AThank%20you.">Ask about the partner terms</a>
+      </div>
+    </section>
+
+    <!-- ── Contact ────────────────────────────────────────────────────── -->
+    <section class="sec" id="contact">
+      <div class="sec-head">
+        <div class="sec-label">Contact</div>
+        <div>
+          <h2>A person, not a ticket queue.</h2>
+          <p>
+            Write to <a href="mailto:ebo4udat@gmail.com">ebo4udat@gmail.com</a> and you reach the
+            person who builds it. Monday to Friday, 8am–5pm Ghana time; we aim to reply within one
+            working day, and the same day for anything stopping you posting or closing a period.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <span>MoRaj Ledger — a MoRaj Systems &amp; Supplies product. Accra, Ghana.</span>
+      <span><a href="mailto:ebo4udat@gmail.com">ebo4udat@gmail.com</a></span>
+      <span>Your ledger lives on your computer. So does your control of it.</span>
+    </footer>
+  </div>
+</div>
