@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="1024" height="1024">
+  <!-- MoRaj Ledger — the product mark (option 1, "balanced T"): a T-account whose two sides carry the same entries, closed by the double rule under the total. Kept identical to <LedgerMark> in ui/src/components/Brand.tsx. -->
+  <defs><linearGradient id="page" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0%" stop-color="#1d4466"/><stop offset="100%" stop-color="#14304a"/></linearGradient></defs>
+  <rect x="6" y="6" width="108" height="108" rx="26" fill="url(#page)"/>
+  <!-- The T: head rule and spine, cream on navy. -->
+  <g stroke="#f6f1e6" stroke-linecap="round" fill="none" stroke-width="7">
+    <path d="M26 36 H94"/>
+    <path d="M60 36 V84"/>
+  </g>
+  <!-- Three entries a side, every one the same length: the two sides balance. -->
+  <g stroke="#9fb6c8" stroke-linecap="round" fill="none" stroke-width="5">
+    <path d="M32 52 H50"/><path d="M32 64 H50"/><path d="M32 76 H50"/>
+    <path d="M70 52 H88"/><path d="M70 64 H88"/><path d="M70 76 H88"/>
+  </g>
+  <!-- The accountant's double rule under the total. -->
+  <g stroke="#d4a13a" stroke-linecap="round" fill="none" stroke-width="4">
+    <path d="M26 94 H94"/><path d="M26 102 H94"/>
+  </g>
+</svg>
