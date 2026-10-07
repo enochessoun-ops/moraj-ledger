@@ -1,0 +1,20 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>MoRaj media</title>
+<p style="font:16px sans-serif">Sending the MoRaj adverts to the window that opened this one…</p>
+<script>
+// Hands the files named in ?f= to the window that opened this page (the Facebook post
+// composer), as raw bytes over postMessage, then closes. Same-origin fetch, so nothing
+// leaves morajconsult.com except to the opener that asked for it.
+(async () => {
+  const names = new URLSearchParams(location.search).get('f').split(',')
+  const files = []
+  for (const n of names) {
+    const r = await fetch('/media/' + n); const b = await r.arrayBuffer()
+    files.push({ name: n, type: r.headers.get('content-type') || '', buf: b })
+  }
+  window.opener && window.opener.postMessage({ moraj: true, files }, '*', files.map((f) => f.buf))
+  setTimeout(() => window.close(), 500)
+})()
+</script>
