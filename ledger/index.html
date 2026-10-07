@@ -335,6 +335,11 @@
                  gap: .5rem 2rem; justify-content: space-between; color: #7f93a7; font-size: .84rem; }
   @media (max-width: 48rem) { .foot-grid { grid-template-columns: 1fr; } }
 
+  /* Watch: the animated story (the video lives on the site, /assets/video/) */
+  .vid { margin: 0; border: 1px solid var(--rule); border-radius: 14px; overflow: hidden; background: var(--paper); box-shadow: var(--shadow); }
+  .vid video { width: 100%; height: auto; display: block; background: #0b1622; aspect-ratio: 1200 / 744; }
+  .vid figcaption { padding: .9rem 1.2rem 1rem; color: var(--ink-2); font-size: .93rem; }
+
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
 </style>
 </head>
@@ -439,6 +444,23 @@
           </div>
         </div>
       </figure>
+    </div>
+  </section>
+
+  <!-- ── Watch ────────────────────────────────────────────────────────── -->
+  <section class="sec" id="watch">
+    <div class="wrap split">
+      <div class="head">
+        <p class="kicker">Watch</p>
+        <h2>The 15th, a power cut, and the schedules still ready.</h2>
+        <p>
+          No light and no data on deadline day is a normal day for MoRaj Ledger. It runs on your
+          own computer, and the WHT, VAT, PAYE and SSNIT schedules come straight from the entries
+          you have already made.
+        </p>
+      </div>
+      <figure class="vid"><video data-autoplay muted loop playsinline preload="metadata" poster="/assets/video/moraj-ledger-web-poster.jpg" width="1200" height="744"><source src="/assets/video/moraj-ledger-web.mp4" type="video/mp4"></video>
+        <figcaption>Thirteen seconds, no sound needed.</figcaption></figure>
     </div>
   </section>
 
@@ -798,5 +820,6 @@
   </div>
 </footer>
 
+<script src="/assets/play-visible.js" defer></script>
 </body>
 </html>
