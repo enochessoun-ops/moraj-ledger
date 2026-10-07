@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en-GH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MoRaj POS — point of sale for shops, chop bars and restaurants in Ghana</title>
+<meta name="description" content="MoRaj POS: a till for Ghanaian shops, chop bars, restaurants and bars. Barcode selling, tables and kitchen screen, Mobile Money, VAT/NHIL/GETFund on every receipt. Works offline. 14-day free trial.">
+<meta name="theme-color" content="#123f30">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MoRaj Supplies and Consult">
+<meta property="og:title" content="MoRaj POS — the till for shops, chop bars and restaurants">
+<meta property="og:description" content="Sell by barcode or touch, run tables and a kitchen screen, take Mobile Money, and print Ghana VAT on every receipt. Works offline. 14-day free trial.">
+<meta property="og:url" content="https://morajconsult.com/pos/">
+<meta property="og:image" content="https://morajconsult.com/assets/og-pos.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/shield.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/shield-touch.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<style>:root { --band-1: #0d2f23; --band-2: #123f30; }</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#d8dcdf"/><stop offset="45%" stop-color="#b9bfc4"/><stop offset="100%" stop-color="#8f979e"/></linearGradient>
+    <!-- The company's mark: the MoRaj shield (gear, resistor, capacitor). Same geometry as the apps' BrandMark. -->
+    <symbol id="shield" viewBox="0 0 120 132">
+      <path d="M60 3 L113 21 C113 74 96 108 60 129 C24 108 7 74 7 21 Z" fill="#2c6290"/>
+      <path d="M60 3 L113 21 C113 74 96 108 60 129 C60 129 60 3 60 3 Z" fill="url(#steel)"/>
+      <path d="M60 17 L100 30 C100 71 87 98 60 114 C33 98 20 71 20 30 Z" fill="#ffffff"/>
+      <g fill="#245277">
+        <path d="M86.77,57.45 L94.84,57.68 L94.84,64.32 L86.77,64.55 Z M83.74,73.86 L90.14,78.79 L86.24,84.17 L79.57,79.61 Z M71.65,85.36 L73.92,93.11 L67.61,95.16 L64.89,87.55 Z M55.11,87.55 L52.39,95.16 L46.08,93.11 L48.35,85.36 Z M40.43,79.61 L33.76,84.17 L29.86,78.79 L36.26,73.86 Z M33.23,64.55 L25.16,64.32 L25.16,57.68 L33.23,57.45 Z M36.26,48.14 L29.86,43.21 L33.76,37.83 L40.43,42.39 Z M48.35,36.64 L46.08,28.89 L52.39,26.84 L55.11,34.45 Z M64.89,34.45 L67.61,26.84 L73.92,28.89 L71.65,36.64 Z M79.57,42.39 L86.24,37.83 L90.14,43.21 L83.74,48.14 Z"/>
+        <circle cx="60" cy="61" r="27"/>
+      </g>
+      <circle cx="60" cy="61" r="20" fill="#ffffff"/>
+      <g fill="none" stroke="#245277" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M50 52 h5 l1.5 -3.5 l3 7 l3 -7 l3 7 l1.5 -3.5 h3"/><path d="M50 52 V70 H70"/><path d="M70 52 V57"/><path d="M64.5 57 h11"/><path d="M64.5 64 h11"/><path d="M70 64 V70"/>
+      </g>
+    </symbol>
+    <!-- MoRaj Ledger: the T-account with the gold double rule -->
+    <linearGradient id="pg" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0%" stop-color="#1d4466"/><stop offset="100%" stop-color="#14304a"/></linearGradient>
+    <symbol id="m-ledger" viewBox="0 0 120 120">
+      <rect x="6" y="6" width="108" height="108" rx="26" fill="url(#pg)"/>
+      <g stroke="#f6f1e6" stroke-linecap="round" fill="none" stroke-width="7"><path d="M26 36 H94"/><path d="M60 36 V84"/></g>
+      <g stroke="#9fb6c8" stroke-linecap="round" fill="none" stroke-width="5"><path d="M32 52 H50"/><path d="M32 64 H50"/><path d="M32 76 H50"/><path d="M70 52 H88"/><path d="M70 64 H88"/><path d="M70 76 H88"/></g>
+      <g stroke="#d4a13a" stroke-linecap="round" fill="none" stroke-width="4"><path d="M26 94 H94"/><path d="M26 102 H94"/></g>
+    </symbol>
+    <!-- MoRaj POS: a till with the gold receipt coming out of it (assets/marks/moraj-pos.svg) -->
+    <linearGradient id="pbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#23785c"/><stop offset="1" stop-color="#123f30"/></linearGradient>
+    <linearGradient id="pgd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4c656"/><stop offset="1" stop-color="#d49b20"/></linearGradient>
+    <symbol id="m-pos" viewBox="0 0 120 120">
+      <rect x="4" y="4" width="112" height="112" rx="26" fill="url(#pbg)"/>
+  <!-- the receipt coming out of the till: the old mark's gold slip -->
+  <path d="M41 50 V22 l5.5 -5 5.5 5 5.5 -5 5.5 5 5.5 -5 5.5 5 5.5 -5 V50 Z" fill="url(#pgd)"/>
+  <path d="M48 29 H72 M48 36 H66" stroke="#123f30" stroke-width="3.2" stroke-linecap="round" opacity=".75"/>
+  <!-- the till -->
+  <path d="M28 48 H92 L98 84 H22 Z" fill="#f6f1e6"/>
+  <rect x="34" y="54" width="52" height="9" rx="2.5" fill="#123f30"/>
+  <g fill="#1f6b52">
+    <rect x="34" y="68" width="10" height="5.5" rx="1.5"/><rect x="48" y="68" width="10" height="5.5" rx="1.5"/><rect x="62" y="68" width="10" height="5.5" rx="1.5"/><rect x="76" y="68" width="10" height="5.5" rx="1.5"/>
+    <rect x="33" y="76.5" width="10" height="5" rx="1.5"/><rect x="47.5" y="76.5" width="10" height="5" rx="1.5"/><rect x="62.5" y="76.5" width="10" height="5" rx="1.5"/><rect x="77" y="76.5" width="10" height="5" rx="1.5"/>
+  </g>
+  <!-- the cash drawer, with the gold rule -->
+  <rect x="18" y="86" width="84" height="16" rx="4" fill="#e3d6b8"/>
+  <rect x="48" y="92" width="24" height="4" rx="2" fill="#d49b20"/>
+    </symbol>
+    <!-- SuperMarket POS: a trolley with a barcode in the basket (assets/marks/supermarket-pos.svg) -->
+    <linearGradient id="sbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14a87d"/><stop offset="1" stop-color="#0b6b98"/></linearGradient>
+    <symbol id="m-smk" viewBox="0 0 120 120">
+      <rect x="4" y="4" width="112" height="112" rx="26" fill="url(#sbg)"/>
+  <!-- the trolley -->
+  <path d="M18 30 H29 L38 76 H89" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M31 40 H99 L92 68 H37" fill="none" stroke="#fff" stroke-width="7" stroke-linejoin="round"/>
+  <!-- a barcode in the basket -->
+  <g fill="#fff">
+    <rect x="44" y="47" width="3" height="15"/><rect x="50" y="47" width="5" height="15"/><rect x="58" y="47" width="2.5" height="15"/>
+    <rect x="63.5" y="47" width="4" height="15"/><rect x="70.5" y="47" width="2.5" height="15"/><rect x="76" y="47" width="5" height="15"/><rect x="84" y="47" width="2.5" height="15"/>
+  </g>
+  <circle cx="45" cy="90" r="7" fill="#fff"/><circle cx="82" cy="90" r="7" fill="#fff"/>
+    </symbol>
+    <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 4.54 0 8.24 3.7 8.24 8.24 0 4.55-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.17.24-.64.8-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></symbol>
+  </defs>
+</svg>
+
+<header class="top on-dark">
+  <div class="wrap top-in">
+    <a class="logo" href="/" aria-label="MoRaj, all products"><svg aria-hidden="true"><use href="#m-pos"/></svg><span><b>MoRaj POS</b><small>by MoRaj Supplies and Consult</small></span></a>
+    <nav aria-label="Sections">
+      <a href="#features">What it does</a>
+      <a href="#ghana">Ghana</a>
+      <a href="#price">Price</a>
+      <a href="#trial">Free trial</a>
+      <a href="/">All products</a>
+    </nav>
+    <a class="btn btn-wa btn-sm" href="https://wa.me/233244565449?text=Hello%2C%20I%20would%20like%20to%20try%20MoRaj%20POS.%20My%20business%20is%3A%20"><svg aria-hidden="true"><use href="#wa"/></svg>Free trial</a>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero on-dark">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Point of sale for Ghana</p>
+        <h1>Sell faster, and know where every cedi went.</h1>
+        <p class="lede">
+          MoRaj POS runs your counter, your tables and your kitchen from your own computer, with
+          VAT, NHIL and GETFund on every receipt and Mobile Money ticked off at the end of the day.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://wa.me/233244565449?text=Hello%2C%20I%20would%20like%20to%20try%20MoRaj%20POS.%20My%20business%20is%3A%20">Start a 14-day free trial</a>
+          <a class="btn btn-line" href="#features">See what it does</a>
+        </div>
+        <ul class="facts">
+          <li>Works without internet</li>
+          <li>Shops and restaurants</li>
+          <li>English and French</li>
+        </ul>
+      </div>
+      <figure class="shot" aria-label="Screenshot of MoRaj POS">
+        <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>MoRaj POS</span></div>
+        <img src="/assets/img/moraj-pos-sell.webp" width="1366" height="820" alt="The MoRaj POS selling screen: food and drink tiles, a bill of three items, NHIL, GETFund and VAT, and the total of GH₵294.01.">
+      </figure>
+    </div>
+  </section>
+
+  <section class="sec tint" id="features">
+    <div class="wrap">
+      <div class="head">
+        <p class="kicker">What it does</p>
+        <h2>From the first sale of the morning to the cash-up at night.</h2>
+        <p>One system for the counter, the floor and the kitchen. A shop sees the shop screens; a restaurant gets tables and the kitchen as well.</p>
+      </div>
+      <div class="areas">
+        <div class="area lead">
+          <h3>Selling at the counter</h3>
+          <ul>
+            <li>Scan a barcode, search, or tap a product tile</li>
+            <li>Weighed goods, carton prices and wholesale prices</li>
+            <li>Park a sale and serve the next customer</li>
+            <li>Credit customers with a limit you set</li>
+          </ul>
+        </div>
+        <div class="area">
+          <h3>Taking payment</h3>
+          <ul>
+            <li>Cash, with the change in large figures</li>
+            <li>MTN, Telecel and AT Mobile Money, with the transaction ID</li>
+            <li>Card, bank transfer, on account, or dollars</li>
+            <li>Split one bill across several payments</li>
+          </ul>
+        </div>
+        <div class="area">
+          <h3>Tables and the kitchen</h3>
+          <ul>
+            <li>Tables and guests, takeaway, tabs and delivery</li>
+            <li>Options like pepper level and extras, courses held until fired</li>
+            <li>Orders on a kitchen and bar screen</li>
+            <li>Split or move a bill; tips kept out of sales</li>
+          </ul>
+        </div>
+        <div class="area">
+          <h3>Stock and customers</h3>
+          <ul>
+            <li>Goods received, stock counts and expiry dates</li>
+            <li>Promotions and loyalty points</li>
+            <li>Customer statements, sent by WhatsApp</li>
+            <li>Reminders for money customers owe you</li>
+          </ul>
+        </div>
+        <div class="area">
+          <h3>End of the day</h3>
+          <ul>
+            <li>Count the drawer and see over or short</li>
+            <li>A Z report that never changes after the day</li>
+            <li>Mobile Money list to tick against your statement</li>
+            <li>Best sellers, busy hours and gross profit</li>
+          </ul>
+        </div>
+        <div class="area">
+          <h3>Control</h3>
+          <ul>
+            <li>Owner, manager, cashier, waiter and kitchen roles</li>
+            <li>A manager approves big discounts and refunds</li>
+            <li>Several tills and kitchen screens, one stock count</li>
+            <li>Training mode for new staff</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="ghana">
+    <div class="wrap split">
+      <div class="head">
+        <p class="kicker">Made for Ghana</p>
+        <h2>The taxes and the payments you actually deal with.</h2>
+        <p>Not a foreign till with Ghana added later. The receipts, the levies and the Mobile Money networks are the ones your customers and GRA expect.</p>
+      </div>
+      <ul class="docs">
+        <li class="doc"><b>VAT, NHIL and GETFund</b><span>Worked out on every sale and shown on the receipt</span></li>
+        <li class="doc"><b>Tourism levy</b><span>The 1% levy for restaurants and bars, with the figure to declare</span></li>
+        <li class="doc"><b>GRA E-VAT</b><span>Once GRA has onboarded you, every sale is sent and the receipt prints GRA's QR code</span></li>
+        <li class="doc"><b>Mobile Money</b><span>MTN, Telecel and AT, each transaction ID accepted once only</span></li>
+        <li class="doc"><b>Cedis and dollars</b><span>Take dollars at your rate; the change is in cedis</span></li>
+        <li class="doc"><b>Your name on the receipt</b><span>Receipts and bills carry your business's name, not ours</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec tint" id="price">
+    <div class="wrap">
+      <div class="band on-dark">
+        <div>
+          <p class="kicker">Price</p>
+          <h2>Priced for your shop, not for a shop twice its size.</h2>
+          <p>The price depends on how many tills and kitchen screens you need. Tell us on WhatsApp and we send you the price the same day.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://wa.me/233244565449?text=Hello%2C%20please%20send%20me%20the%20price%20of%20MoRaj%20POS.%20Number%20of%20tills%3A%20%20Restaurant%20or%20shop%3A%20"><svg aria-hidden="true"><use href="#wa"/></svg>Ask for a price</a>
+            <a class="btn btn-line" href="mailto:sales@morajconsult.com?subject=MoRaj%20POS%20%E2%80%94%20price&amp;body=Hello%2C%0A%0APlease%20send%20me%20the%20price%20of%20MoRaj%20POS.%0A%0ABusiness%3A%20%0AShop%20or%20restaurant%3A%20%0ANumber%20of%20tills%3A%20%0AWindows%20or%20Mac%3A%20%0A%0AThank%20you.">Or by email</a>
+          </div>
+        </div>
+        <ul>
+          <li><b>14 days free, everything unlocked</b><span>Sell for real in the trial; when you buy, a licence key unlocks the same copy and nothing is lost.</span></li>
+          <li><b>We set you up</b><span>Your business details, taxes, printer and first products, with you.</span></li>
+          <li><b>Your staff learn on practice books</b><span>Training mode lets them make mistakes that never reach the real sales.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="trial">
+    <div class="wrap">
+      <div class="head">
+        <p class="kicker">Free trial</p>
+        <h2>Fourteen days, on your own counter.</h2>
+      </div>
+      <ol class="steps">
+        <li><b>Send us a message</b><span>Tell us your business, shop or restaurant, and whether you use Windows or a Mac.</span></li>
+        <li><b>We install it with you</b><span>We send the installer and help you through setup, usually the same working day.</span></li>
+        <li><b>Sell for real</b><span>Use it with your customers for 14 days. Buy, and everything you entered stays.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec tint" id="faq">
+    <div class="wrap">
+      <div class="head">
+        <p class="kicker">Questions</p>
+        <h2>What owners ask before they start.</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>Does it need the internet?</summary>
+          <p>No. Selling never needs the internet. It is only used, when it is there, for GRA E-VAT, the owner's daily email and updates. Sales made offline are sent to GRA when the connection returns.</p>
+        </details>
+        <details>
+          <summary>Will my barcode scanner and receipt printer work?</summary>
+          <p>A standard USB barcode scanner works without any setup. Receipt printers and cash drawers are set up under Settings, with a test print. Tell us your models and we will confirm before you buy.</p>
+        </details>
+        <details>
+          <summary>Can I have more than one till?</summary>
+          <p>Yes. One computer is the main till and keeps the books; the other tills and kitchen screens connect to it over your shop's network and share one stock count and one receipt sequence.</p>
+        </details>
+        <details>
+          <summary>What if the computer breaks or is stolen?</summary>
+          <p>MoRaj POS backs itself up while you work, seals each backup with your passphrase, and can copy it to a flash drive or a synced folder. Restore it on the new computer and carry on.</p>
+        </details>
+        <details>
+          <summary>Can my cashiers steal with it?</summary>
+          <p>Every person signs in as themselves, a manager approves large discounts and refunds, and the drawer is counted before the expected figure is shown. Nothing hides a shortage.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="contact">
+    <div class="wrap contact">
+      <div class="head">
+        <p class="kicker">Contact</p>
+        <h2>Talk to the people who build it.</h2>
+        <p>We reply within one working day, and the same day when something is stopping you selling.</p>
+        <p class="hours">Monday to Friday, 8am to 5pm Ghana time.</p>
+      </div>
+      <div class="ways">
+        <div class="way"><div><small>WhatsApp or call</small><b>+233 24 456 5449</b></div><a class="btn btn-wa btn-sm" href="https://wa.me/233244565449?text=Hello%2C%20I%20have%20a%20question%20about%20MoRaj%20POS."><svg aria-hidden="true"><use href="#wa"/></svg>Open WhatsApp</a></div>
+        <div class="way"><div><small>Email</small><b>sales@morajconsult.com</b></div><a class="btn btn-line btn-sm" href="mailto:sales@morajconsult.com?subject=MoRaj%20POS">Send an email</a></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="/" aria-label="MoRaj Supplies and Consult, home"><svg aria-hidden="true"><use href="#shield"/></svg><span><b>MoRaj</b><small>Supplies and Consult</small></span></a>
+        <p style="margin-top:1rem">Accounting and point-of-sale software for Ghanaian businesses, schools and NGOs. Your data stays on your own computer.</p>
+      </div>
+      <div>
+        <b>Products</b>
+        <p><a href="/ledger/">MoRaj Ledger</a></p>
+        <p><a href="/pos/">MoRaj POS</a></p>
+        <p><a href="/supermarket/">SuperMarket POS</a></p>
+      </div>
+      <div>
+        <b>Contact</b>
+        <p><a href="https://wa.me/233244565449">+233 24 456 5449</a></p>
+        <p><a href="mailto:sales@morajconsult.com">sales@morajconsult.com</a></p>
+        <p>Accra, Ghana</p>
+      </div>
+    </div>
+    <div class="legal">
+      <span>MoRaj Supplies and Consult, Accra.</span>
+      <span>Business reg. BN265031025 · TIN GHA-001260777-8</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/233244565449?text=Hello%2C%20I%20would%20like%20to%20try%20MoRaj%20POS.%20My%20business%20is%3A%20" aria-label="Chat with us on WhatsApp"><svg aria-hidden="true"><use href="#wa"/></svg>Chat</a>
+
+</body>
+</html>

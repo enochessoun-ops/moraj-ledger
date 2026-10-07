@@ -1,12 +1,18 @@
-# MoRaj Ledger — website
+# morajconsult.com
 
-The public site for **MoRaj Ledger**, offline accounting software for Ghanaian
-businesses, schools and NGOs. A product of MoRaj Supplies and Consult.
+The public website of **MoRaj Supplies and Consult**: the company home page and one page per
+product. This repository holds the website only; the application sources are private.
 
-This repository holds the website only. The application source is private.
+| Path | Page | Source |
+|---|---|---|
+| `/` | Company home | `index.html`, here |
+| `/ledger/` | MoRaj Ledger | `docs/landing.html` in the private Suite repo, copied here **whole** as `ledger/index.html` on every Ledger release (the release check reads the "Current build" line from the source) |
+| `/pos/` | MoRaj POS | `pos/index.html`, here |
+| `/supermarket/` | SuperMarket POS | `supermarket/index.html`, here |
 
-To publish a change: edit `docs/landing.html` in the private Suite repo and copy it
-here as `index.html`. The icons and link-preview card come from `docs/site-assets/`
-in the same repo (`favicon.svg`, `apple-touch-icon.png`, `og.png`); re-render the PNGs
-with `node docs/site-assets/render.mjs` rather than editing them. Commit and push —
-GitHub Pages serves it within a minute.
+Shared styles are `assets/site.css`; the product marks are `assets/marks/`. The link-preview
+cards `assets/og-*.png` are rendered from `marketing/ads/creatives.html` in the Suite repo
+(`node marketing/ads/render.mjs`), together with the ad images. `favicon.svg`,
+`apple-touch-icon.png` and `og.png` at the root belong to the Ledger page.
+
+Commit and push; GitHub Pages serves it within a minute.
