@@ -340,6 +340,17 @@
   .vid video { width: 100%; height: auto; display: block; background: #0b1622; aspect-ratio: 1200 / 744; }
   .vid figcaption { padding: .9rem 1.2rem 1rem; color: var(--ink-2); font-size: .93rem; }
 
+  /* A way home to the company site, at every width */
+  .home-link { display: inline-flex; align-items: center; gap: .4rem; padding: .45rem .8rem; border-radius: 8px; border: 1px solid rgba(255,255,255,.28);
+               color: #fff; text-decoration: none; font-weight: 600; font-size: .9rem; white-space: nowrap; margin-left: .25rem; }
+  .home-link:hover { border-color: rgba(255,255,255,.7); }
+  .home-link svg { width: 1rem; height: 1rem; }
+  .top .home-link + .btn { margin-left: .5rem; }
+  @media (max-width: 52rem) { .top .home-link { margin-left: auto; } }
+  @media (max-width: 26rem) { .home-link span { display: none; } }
+  .top .btn, .logo b { white-space: nowrap; }
+  @media (max-width: 26rem) { .logo b { font-size: 1.05rem; } .top .btn-sm { padding-inline: .8rem; } }
+
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
 </style>
 </head>
@@ -358,6 +369,7 @@
       </g>
       <g stroke="#d4a13a" stroke-linecap="round" fill="none" stroke-width="4"><path d="M26 94 H94"/><path d="M26 102 H94"/></g>
     </symbol>
+    <symbol id="home" viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5M5.5 9.8V20h4.8v-5.6h3.4V20h4.8V9.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   </defs>
 </svg>
 
@@ -373,8 +385,8 @@
       <a href="#trial">Free trial</a>
       <a href="#faq">Questions</a>
       <a href="#contact">Contact</a>
-      <a href="/">All products</a>
     </nav>
+    <a class="home-link" href="/" aria-label="MoRaj home" title="MoRaj home"><svg aria-hidden="true"><use href="#home"/></svg><span>Home</span></a>
     <a class="btn btn-primary btn-sm" href="#trial">Try it free</a>
   </div>
 </header>
@@ -805,7 +817,7 @@
         <p><a href="#ghana">Ghana tax</a></p>
         <p><a href="#pricing">Pricing</a></p>
         <p><a href="#trial">Free trial</a></p>
-        <p><a href="/">All MoRaj products</a></p>
+        <p><a href="/">MoRaj home</a></p>
       </div>
       <div>
         <b>Contact</b>
