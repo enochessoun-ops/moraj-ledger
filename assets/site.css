@@ -317,3 +317,11 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 @media (max-width: 48rem) { .services { grid-template-columns: 1fr; } }
 @media (max-width: 56rem) { .top nav + .home-link { margin-left: auto; } }
 @media (max-width: 26rem) { .logo b { font-size: 1rem; } .logo svg { width: 30px; height: 30px; } .top-in { gap: .75rem; } .top .btn svg { display: none; } .top .btn { padding-inline: .75rem; } }
+
+/* Sound on/off over each video */
+.has-sound { position: relative; }
+.sound-btn { position: absolute; right: .8rem; top: .8rem; z-index: 2; display: inline-flex; align-items: center; gap: .4rem; padding: .45rem .8rem;
+             border: 0; border-radius: 99px; background: rgba(8, 18, 30, .78); color: #fff; font: 600 .85rem/1 var(--sans); cursor: pointer; }
+.sound-btn:hover { background: rgba(8, 18, 30, .92); }
+.sound-btn svg { width: 1.05rem; height: 1.05rem; }
+.sound-btn[aria-pressed="true"] { background: var(--wa); }

@@ -339,6 +339,11 @@
   .vid { margin: 0; border: 1px solid var(--rule); border-radius: 14px; overflow: hidden; background: var(--paper); box-shadow: var(--shadow); }
   .vid video { width: 100%; height: auto; display: block; background: #0b1622; aspect-ratio: 1200 / 744; }
   .vid figcaption { padding: .9rem 1.2rem 1rem; color: var(--ink-2); font-size: .93rem; }
+  .has-sound { position: relative; }
+  .sound-btn { position: absolute; right: .8rem; top: .8rem; z-index: 2; display: inline-flex; align-items: center; gap: .4rem; padding: .45rem .8rem;
+               border: 0; border-radius: 99px; background: rgba(8, 18, 30, .78); color: #fff; font: 600 .85rem/1 var(--sans); cursor: pointer; }
+  .sound-btn svg { width: 1.05rem; height: 1.05rem; }
+  .sound-btn[aria-pressed="true"] { background: #1a8f4c; }
 
   /* A way home to the company site, at every width */
   .home-link { display: inline-flex; align-items: center; gap: .4rem; padding: .45rem .8rem; border-radius: 8px; border: 1px solid rgba(255,255,255,.28);
