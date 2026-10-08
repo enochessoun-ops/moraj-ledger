@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /media/relay.html
+
+Sitemap: https://morajconsult.com/sitemap.xml
