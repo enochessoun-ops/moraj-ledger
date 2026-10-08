@@ -14,7 +14,8 @@
     const r = await fetch('/media/' + n); const b = await r.arrayBuffer()
     files.push({ name: n, type: r.headers.get('content-type') || '', buf: b })
   }
-  window.opener && window.opener.postMessage({ moraj: true, files }, '*', files.map((f) => f.buf))
-  setTimeout(() => window.close(), 500)
+  const to = window.opener || (window.parent !== window ? window.parent : null)
+  to && to.postMessage({ moraj: true, files }, '*', files.map((f) => f.buf))
+  if (window.opener) setTimeout(() => window.close(), 500)
 })()
 </script>
